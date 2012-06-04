@@ -1,1 +1,28 @@
 #!/bin/bash
+
+if [[ "$HOSTNAME" != "clue" ]]; then
+	echo "Must be run on clue."
+	exit
+fi
+
+for HOST in $*
+do
+	if [[ "$HOST" =~ "," ]]; then
+		realm `echo $HOST | tr ',' ' '`
+	else
+		RESULT=`grep $HOST.cisco.com /auto/ecs-sfo/sfo.*`
+		if [[ -z $RESULT ]]; then
+			echo $HOST: not found in ECS hosts
+		else
+			if [[ "$RESULT" =~ "sfo.dc" ]]; then
+				REALM="ECS"
+			elif [[ "$RESULT" =~ "sfo.dt" ]]; then
+				REALM="Deskop"
+			elif [[ "$RESULT" =~ "sfo.lab" ]]; then
+				REALM="Lab"
+			fi
+			echo "$REALM	($RESULT)"
+		fi
+	fi
+done
+
