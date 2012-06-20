@@ -10,7 +10,7 @@ do
 	if [[ "$HOST" =~ "," ]]; then
 		realm `echo $HOST | tr ',' ' '`
 	else
-		RESULT=`grep $HOST.cisco.com /auto/ecs-sfo/sfo.*`
+		RESULT=`grep ^$HOST.cisco.com /auto/ecs-sfo/sfo.*`
 		if [[ -z $RESULT ]]; then
 			echo $HOST: not found in ECS hosts
 		else
