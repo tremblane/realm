@@ -17,7 +17,7 @@ do
 			if [[ "$RESULT" =~ "sfo.dc" ]]; then
 				REALM="ECS"
 			elif [[ "$RESULT" =~ "sfo.dt" ]]; then
-				REALM="Deskop"
+				REALM="Desktop"
 			elif [[ "$RESULT" =~ "sfo.lab" ]]; then
 				REALM="Lab"
 			fi
